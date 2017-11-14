@@ -1,0 +1,31 @@
+<link rel="import" href="../node_modules//@polymer/polymer/polymer-element.html">
+<link rel="import" href="./components/polymer.html">
+<link rel="import" href="./components/vanilla.html">
+
+<dom-module id="my-app">
+    <template>
+        <vanilla-component title="Chocolate"></vanilla-component>
+        <polymer-component></polymer-component>
+    </template>
+    <script>
+        class App extends Polymer.Element {
+            static get is() { return 'my-app'; }
+
+            static get properties() {
+                return {
+                    title: {
+                        type: String,
+                        value: 'Polymer'
+                    }
+                }
+            }
+
+            constructor() {
+                super();
+                this.companyName = "Scott Logic";
+            }
+        }
+
+        customElements.define(App.is, App);
+    </script>
+</dom-module>

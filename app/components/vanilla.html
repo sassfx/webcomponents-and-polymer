@@ -1,0 +1,50 @@
+<template id="vanilla-header">
+  <h2></h2>
+</template>
+<script>
+  var currentDocument = document.currentScript.ownerDocument;
+  class VanillaComponent extends HTMLElement {
+    static get is() { return 'vanilla-component'; }
+  
+    constructor() {
+      super()
+      this.companyName = "Scott Logic"
+    }
+  
+    render() {
+      var shadowRoot = this.shadowRoot || this.attachShadow({mode: 'open'});
+      shadowRoot.innerHTML = '';
+      var template = currentDocument.querySelector('#vanilla-header');
+      var heading = template.content.querySelector('h2');
+      heading.textContent = `Hello ${this.title} welcome to ${this.companyName}`;
+      var concrete = currentDocument.importNode(template.content, true);
+      shadowRoot.appendChild(concrete); 
+    }
+  
+    connectedCallback() {
+      this.render();
+    }
+
+    static get observedAttributes() {
+      return ['title'];
+    }
+  
+    get title() {
+      return this.hasAttribute('title') ? this.getAttribute('title') : 'Vanilla';
+    }
+  
+    set title(val) {
+      if (val) {
+        this.setAttribute('title', val);
+      } else {
+        this.removeAttribute('title');
+      }
+    }
+  
+    attributeChangedCallback(name, old, change) {
+      this.render();
+    }
+  }
+  
+  window.customElements.define(VanillaComponent.is, VanillaComponent);
+</script>

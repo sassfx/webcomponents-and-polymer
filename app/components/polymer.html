@@ -1,0 +1,28 @@
+<link rel="import" href="../../node_modules/@polymer/polymer/polymer-element.html">
+
+<dom-module id="polymer-component">
+    <template>
+         <h2>Hello [[title]] welcome to [[companyName]]</h2>
+    </template>
+    <script>
+        class InputForm extends Polymer.Element {
+            static get is() { return 'polymer-component'; }
+
+            static get properties() {
+                return {
+                    title: {
+                        type: String,
+                        value: 'Polymer'
+                    }
+                }
+            }
+
+            constructor() {
+                super();
+                this.companyName = "Scott Logic";
+            }
+        }
+
+        customElements.define(InputForm.is, InputForm);
+    </script>
+</dom-module>
