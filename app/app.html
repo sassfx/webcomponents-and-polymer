@@ -4,8 +4,9 @@
 
 <dom-module id="my-app">
     <template>
-        <vanilla-component title="Chocolate"></vanilla-component>
-        <polymer-component></polymer-component>
+        <input id="title-input" type="text" on-input="inputChanged"/>
+        <vanilla-component title="[[title]]"></vanilla-component>
+        <polymer-component title="[[title]]"></polymer-component>
     </template>
     <script>
         class App extends Polymer.Element {
@@ -22,7 +23,10 @@
 
             constructor() {
                 super();
-                this.companyName = "Scott Logic";
+            }
+
+            inputChanged(e) {
+                this.title = e.target.value;
             }
         }
 

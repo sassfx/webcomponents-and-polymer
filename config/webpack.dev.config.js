@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     app: [
       'webpack-dev-server/client?http://localhost:8080', // live reload
+      './app/app.html'
     ]
   },
   devtool: 'inline-source-map',
@@ -13,7 +14,7 @@ module.exports = {
     hot: true
   },
   output: {
-    filename: '[name].js',
+    filename: 'app.js',
     path: path.resolve(__dirname, '..', 'dist')
   },
   plugins: [
@@ -21,5 +22,14 @@ module.exports = {
       template: './index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.html$/,
+        exclude: [path.resolve(__dirname, '..', 'index.html')],
+        use: ['polymer-webpack-loader']
+      }
+    ]
+  },
 };
